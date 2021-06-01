@@ -7,4 +7,5 @@ module.exports = {
       { outputDirectory: 'reports', outputName: 'angular.tests.xml' },
     ],
   ],
+  coverageReporters: ['text', 'lcov', 'cobertura'],
 };

@@ -15,8 +15,9 @@ pipeline {
             steps {
                 dir('playground') {
                     nodejs('Node') {
-                        sh 'nx test'
-                        junit 'playground/reports/angular.tests.xml'
+                        sh 'npx jest --coverage'
+                        junit 'reports/angular.tests.xml'
+                        publishCoverage adapters: [coberturaAdapter('coverage/cobertura-coverage.xml')]
                     }
                 }
             }
