@@ -2,19 +2,31 @@ pipeline {
     agent any
 
     stages {
-        stage('Build') {
-            steps {
-                echo 'Building...'
-            }
-        }
         stage('Test') {
             steps {
-                echo 'Testing...'
+                dir('playground') {
+                    nodejs('Node') {
+                        sh 'nx test'
+                    }
+                }
             }
         }
-        stage('Deploy') {
+        stage('e2e Tests') {
             steps {
-                echo 'Deploying...'
+                dir('playground') {
+                    nodejs('Node') {
+                        sh 'nx e2e --headless'
+                    }
+                }
+            }
+        }
+        stage('Build') {
+            steps {
+                dir('playground') {
+                    nodejs('Node') {
+                        sh 'nx build'
+                    }
+                }
             }
         }
     }
