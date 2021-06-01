@@ -16,6 +16,7 @@ pipeline {
                 dir('playground') {
                     nodejs('Node') {
                         sh 'nx test'
+                        junit 'reports/angular.tests.xml'
                     }
                 }
             }
